@@ -16,7 +16,7 @@ public class EmailService {
     private final EmailRepository emailRepository;
 
     // Set your sender address here
-    private static final String SENDER_EMAIL = "your_sender_email@example.com";
+    private static final String SENDER_EMAIL = "email@example.com";
 
     public EmailService(JavaMailSender mailSender, EmailRepository emailRepository) {
         this.mailSender = mailSender;
