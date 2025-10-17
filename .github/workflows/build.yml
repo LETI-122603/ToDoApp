@@ -1,41 +1,41 @@
-name: Build and Deploy ToDoApp
+name: Java CI - Maven
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java-version: [17]
 
     steps:
-      # 1️⃣ Faz checkout do código do repositório
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ Configura o JDK (Java 21 ou superior)
-      - name: Set up JDK 21
+      - name: Set up JDK ${{ matrix.java-version }}
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
           distribution: 'temurin'
-          cache: 'maven'
+          java-version: ${{ matrix.java-version }}
 
-      # 3️⃣ Executa o build com Maven para gerar o .jar
+      - name: Cache Maven repository
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: maven-${{ runner.os }}-
+
       - name: Build with Maven
-        run: mvn -B clean package
+        run: mvn -B clean verify
 
-      # 4️⃣ (Opcional) Copia o .jar para a raiz do repositório
-      - name: Copy JAR to root
-        run: cp target/*.jar .
-
-      # 5️⃣ Publica o .jar gerado como artefacto do workflow
-      - name: Upload artifact
+      - name: Upload build artifact (jar)
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ToDoApp-jar
+          name: app-jar
           path: target/*.jar
