@@ -1,6 +1,8 @@
-# Video de demonstração https://www.youtube.com/watch?v=HktlYk8dJFM
-
-- [ ] TODO Replace or update this README with instructions relevant to your application
+# Video de demonstração https://youtu.be/wnTBsX_R6GI
+Grupo - TP04-1
+Curso - LETI
+Tiago Eliseu  nº122603
+Guilherme Teixeira  nº111138
 
 ## Project Structure
 
