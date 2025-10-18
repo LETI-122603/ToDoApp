@@ -1,4 +1,4 @@
-# Video de demonstração https://youtu.be/wnTBsX_R6GI](https://youtu.be/wnTBsX_R6GI
+# Video de demonstração https://youtu.be/wnTBsX_R6GI
 
 Grupo - TP04-1
 
