@@ -14,5 +14,6 @@ interface PdfRepository extends JpaRepository<Pdf, Long>, JpaSpecificationExecut
     /**
      * Lista "simples" paginada (sem filtros). Mantida por compatibilidade.
      */
+    /// teste
     Slice<Pdf> findAllBy(Pageable pageable);
 }
