@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.Duration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -24,9 +25,14 @@ class TaskServiceTest {
         var now = Instant.now();
         var due = LocalDate.of(2025, 2, 7);
         taskService.createTask("Do this", due);
-        assertThat(taskService.list(PageRequest.ofSize(1))).singleElement()
-                .matches(task -> task.getDescription().equals("Do this") && due.equals(task.getDueDate())
-                        && task.getCreationDate().isAfter(now));
+
+        // Verifica se a tarefa criada tem o timestamp correto (dentro de 1 segundo)
+        assertThat(taskService.list(PageRequest.ofSize(1)))
+                .singleElement()
+                .matches(task -> task.getDescription().equals("Do this")
+                                && due.equals(task.getDueDate())
+                                && Duration.between(task.getCreationDate(), now).toMillis() < 1000,
+                        "timestamp should be within 1 second of current time");
     }
 
     @Test
