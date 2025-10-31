@@ -14,7 +14,6 @@ public class Pdf {
     public enum Status {
         PENDING, PRINTED, SENT, CANCELED
     }
-    bug
 
     /** Identificador único da impressora PDF. */
     @Id
