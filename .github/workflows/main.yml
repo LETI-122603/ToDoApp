@@ -1,4 +1,4 @@
-#yml
+# ymal
 name: SonarQube Analysis
 
 on:
